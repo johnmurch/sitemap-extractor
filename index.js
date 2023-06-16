@@ -31,20 +31,22 @@ async function extractSitemapOfSitemaps(url) {
 
 // Main function to process the sitemap of sitemaps
 async function processSitemapOfSitemaps(sitemapOfSitemapsUrl) {
-  const sitemapOfSitemaps = await extractSitemapOfSitemaps(
-    sitemapOfSitemapsUrl
-  );
-  const allUrls = [];
+  const sitemapOfSitemaps = await extractSitemapOfSitemaps(sitemapOfSitemapsUrl);
+  const uniqueUrls = new Set();
 
   // Process each individual sitemap
   for (const sitemapUrl of sitemapOfSitemaps) {
     const sitemapUrls = await extractSitemapOfSitemaps(sitemapUrl);
-    allUrls.push(...sitemapUrls);
+
+    // Add URLs to the Set
+    for (const url of sitemapUrls) {
+      uniqueUrls.add(url);
+    }
   }
 
-  // Write URLs to a file
-  const csvContent = allUrls.join("\n");
-  fs.writeFileSync("urls.csv", csvContent);
+  // Write unique URLs to a file
+  const csvContent = Array.from(uniqueUrls).join('\n');
+  fs.writeFileSync('urls.csv', csvContent);
 }
 
 // Call the main function with the URL of the sitemap of sitemaps
