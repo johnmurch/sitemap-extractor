@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "sitemap-extractor",
+  "version": "1.0.0",
+  "description": "Extract zip sitemaps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Murch",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "zlib": "^1.0.5"
+  }
+}
